@@ -1,10 +1,14 @@
 import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { site, languages, proofPoints, expertise, serviceOfferings, architectureNotes, caseStudies, experience, education, spokenLanguages, certifications } from '../src/content.mjs';
+import { site, languages, proofPoints, expertise, serviceOfferings, architectureNotes, caseStudies, experience, experienceRu, education, educationRu, spokenLanguages, spokenLanguagesRu, certifications, certificationsRu } from '../src/content.mjs';
 
 const out = 'dist';
 const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const slug = (value) => {
+  const normalized = String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  if (normalized) return normalized;
+  return encodeURIComponent(String(value).toLowerCase()).replace(/%/g, '').slice(0, 64);
+};
 const list = (items, cls = 'list') => `<ul class="${cls}">${items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`;
 const tags = (items) => `<div class="tags">${items.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}</div>`;
 const isoDate = new Date().toISOString().slice(0, 10);
@@ -62,11 +66,11 @@ function layout(lang, body) {
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <a class="skip" href="#main">${lang === 'ru' ? 'Перейти к содержимому' : 'Skip to content'}</a>
   <header class="header">
     <div class="container header__inner">
-      <a class="brand" href="${l.path}" aria-label="${esc(site.name)} home"><span class="brand__mark">YS</span><span>${esc(site.name)}</span></a>
-      <nav class="nav" aria-label="Primary">
+      <a class="brand" href="${l.path}" aria-label="${esc(site.name)} ${lang === 'ru' ? 'главная' : 'home'}"><span class="brand__mark">YS</span><span>${esc(site.name)}</span></a>
+      <nav class="nav" aria-label="${lang === 'ru' ? 'Основная навигация' : 'Primary'}">
         ${l.nav.map((n, i) => `<a href="#${navTargets[i]}">${esc(n)}</a>`).join('')}
         <a class="lang" href="${l.altPath}">${l.altLabel}</a>
       </nav>
@@ -80,7 +84,7 @@ function layout(lang, body) {
     </nav>
   </details>
   <main id="main">${body}</main>
-  <footer class="footer"><div class="container">© ${new Date().getFullYear()} ${esc(site.name)}. Built as a static portfolio for ${esc(site.url.replace('https://',''))}.</div></footer>
+  <footer class="footer"><div class="container">© ${new Date().getFullYear()} ${esc(site.name)}. ${lang === 'ru' ? `Статическое портфолио для ${esc(site.url.replace('https://',''))}.` : `Built as a static portfolio for ${esc(site.url.replace('https://',''))}.`}</div></footer>
 </body>
 </html>`;
 }
@@ -88,6 +92,10 @@ function layout(lang, body) {
 function page(lang) {
   const l = languages[lang];
   const cases = caseStudies[lang];
+  const jobs = lang === 'ru' ? experienceRu : experience;
+  const educationItems = lang === 'ru' ? educationRu : education;
+  const spokenLanguageItems = lang === 'ru' ? spokenLanguagesRu : spokenLanguages;
+  const certificationItems = lang === 'ru' ? certificationsRu : certifications;
   const body = `
 <section class="hero">
   <div class="container hero__grid">
@@ -101,11 +109,11 @@ function page(lang) {
         <a class="button" href="/cv/iurii-shpynev-cv.html">${lang === 'ru' ? 'CV для печати' : 'Printable CV'}</a>
       </div>
     </div>
-    <aside class="card hero-card" aria-label="Profile summary">
-      <div class="signal"><b>${esc(site.name)}</b><span>${esc(site.headline)}</span></div>
-      <div class="signal"><b>${esc(site.location)}</b><span>${lang === 'ru' ? 'Remote / Europe-friendly' : 'Remote / Europe-friendly'}</span></div>
-      <div class="signal"><b>${esc(getExperienceYears())} years</b><span>Software engineering</span></div>
-      <div class="signal"><b>Backend · Data · AI · Games</b><span>Architecture & delivery</span></div>
+    <aside class="card hero-card" aria-label="${lang === 'ru' ? 'Краткое резюме профиля' : 'Profile summary'}">
+      <div class="signal"><b>${esc(site.name)}</b><span>${esc(lang === 'ru' ? 'Технический архитектор и разработчик AI-систем' : site.headline)}</span></div>
+      <div class="signal"><b>${esc(lang === 'ru' ? 'Лимасол, Кипр' : site.location)}</b><span>${lang === 'ru' ? 'Удалённо / удобный часовой пояс для Европы' : 'Remote / Europe-friendly'}</span></div>
+      <div class="signal"><b>${esc(getExperienceYears())}${lang === 'ru' ? ' лет' : ' years'}</b><span>${lang === 'ru' ? 'Разработка ПО' : 'Software engineering'}</span></div>
+      <div class="signal"><b>${lang === 'ru' ? 'Backend · Данные · AI · Игры' : 'Backend · Data · AI · Games'}</b><span>${lang === 'ru' ? 'Архитектура и поставка изменений' : 'Architecture & delivery'}</span></div>
     </aside>
   </div>
   <div class="container proofs" aria-label="${esc(l.proofTitle)}">${proofPoints[lang].map((point) => `<div class="proof">${esc(applyDynamicExperience(point))}</div>`).join('')}</div>
@@ -133,15 +141,15 @@ function page(lang) {
 
 <section class="section" id="experience">
   <div class="container section__head"><div><div class="kicker">05</div><h2>${esc(l.experienceTitle)}</h2></div></div>
-  <div class="container card panel timeline">${experience.map((job) => `<article class="job"><h3>${esc(job.company)} — ${esc(job.role)}</h3><p class="meta">${esc(job.dates)} · ${esc(job.location)}</p><p>${esc(job.summary)}</p></article>`).join('')}</div>
+  <div class="container card panel timeline">${jobs.map((job) => `<article class="job"><h3>${esc(job.company)} — ${esc(job.role)}</h3><p class="meta">${esc(job.dates)} · ${esc(job.location)}</p><p>${esc(job.summary)}</p></article>`).join('')}</div>
 </section>
 
 <section class="section" id="cv">
   <div class="container section__head"><div><div class="kicker">06</div><h2>${esc(l.cvTitle)}</h2></div><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>${esc(l.ctaSecondary)}</a></div></div>
   <div class="container cv-grid">
-    <article class="panel"><h3>Education</h3>${list(education)}</article>
-    <article class="panel"><h3>Languages</h3>${list(spokenLanguages)}</article>
-    <article class="panel"><h3>Certifications</h3>${list(certifications)}</article>
+    <article class="panel"><h3>${lang === 'ru' ? 'Образование' : 'Education'}</h3>${list(educationItems)}</article>
+    <article class="panel"><h3>${lang === 'ru' ? 'Языки' : 'Languages'}</h3>${list(spokenLanguageItems)}</article>
+    <article class="panel"><h3>${lang === 'ru' ? 'Сертификаты' : 'Certifications'}</h3>${list(certificationItems)}</article>
   </div>
 </section>
 
@@ -159,7 +167,7 @@ function page(lang) {
       <a class="button" href="mailto:${site.contacts.email}">${site.contacts.email}</a>
       <a class="button" href="${site.contacts.github}" rel="me noopener">GitHub</a>
     </div>
-    <p class="small" style="margin-top:16px">Phone is intentionally not published. Use LinkedIn, Telegram or email.</p>
+    <p class="small" style="margin-top:16px">${lang === 'ru' ? 'Телефон намеренно не опубликован. Для связи используйте LinkedIn, Telegram или email.' : 'Phone is intentionally not published. Use LinkedIn, Telegram or email.'}</p>
   </div>
 </section>`;
   return layout(lang, body);

@@ -118,8 +118,8 @@ p { margin: 0 0 16px; color: var(--muted); }
   .section__head { display: block; }
 }
 @media print {
-  body { background: #fff; color: #111; }
-  body::before, .header, .actions, .footer { display: none; }
+  body { background: #fff; color: #111; padding-bottom: 0; }
+  body::before, .header, .actions, .footer, .mobile-toc { display: none !important; }
   .card, .panel, .proof { border-color: #ddd; background: #fff; box-shadow: none; }
   p, .meta, .list { color: #333; }
   a { color: #111; }
