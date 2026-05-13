@@ -1,0 +1,17 @@
+{
+  "name": "iurii-shpynev-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Bilingual static portfolio and expanded CV for Iurii Shpynev.",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "dev": "npm run build && node scripts/serve.mjs dist 3000",
+    "preview": "node scripts/serve.mjs dist 3000"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
