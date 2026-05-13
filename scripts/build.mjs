@@ -26,7 +26,7 @@ function applyDynamicExperience(value) {
   return String(value).replaceAll('dynamicExperience', getExperienceYears());
 }
 
-function layout(lang, body) {
+function layout(lang, body, minimal = false) {
   const l = languages[lang];
   const localized = { ...l, title: applyDynamicExperience(l.title), description: applyDynamicExperience(l.description) };
   const canonical = `${site.url}${l.path}`;
@@ -38,7 +38,7 @@ function layout(lang, body) {
     sameAs: [site.contacts.linkedin, site.contacts.telegram, site.contacts.github],
     knowsAbout: ['Technical Architecture', 'AI systems', 'AI agents', 'Workflow automation', 'High-load platforms', 'Data pipelines', 'Backend development', 'Reliability engineering']
   };
-  return `<!doctype html>
+  const head = `<!doctype html>
 <html lang="${l.htmlLang}">
 <head>
   <meta charset="utf-8">
@@ -64,7 +64,15 @@ function layout(lang, body) {
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
-</head>
+</head>`;
+  if (minimal) {
+    return `${head}
+<body>
+  <main id="main">${body}</main>
+</body>
+</html>`;
+  }
+  return `${head}
 <body>
   <a class="skip" href="#main">${lang === 'ru' ? 'Перейти к содержимому' : 'Skip to content'}</a>
   <header class="header">
