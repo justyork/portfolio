@@ -13,6 +13,7 @@ const experienceYears = getExperienceYears();
 
 const required = [
   'dist/index.html',
+  'dist/404.html',
   'dist/en/index.html',
   'dist/ru/index.html',
   'dist/assets/styles.css',
@@ -27,7 +28,7 @@ const required = [
 for (const file of required) await stat(file);
 const all = await Promise.all(required.filter((f) => f.endsWith('.html') || f.endsWith('.css') || f.endsWith('.svg')).map((f) => readFile(f, 'utf8')));
 const joined = all.join('\n');
-const mustContain = ['Iurii Shpynev', 'Technical Architect & AI System Builder', `${experienceYears} years in software engineering`, 'https://t.me/JustYork', 'https://www.linkedin.com/in/shpynev', 'yorkshp@gmail.com', 'meta name="robots" content="index, follow', 'rel="alternate" hreflang="en"', 'Irkutsk, Russia', 'Открыт к релевантным обсуждениям', 'Architecture notes', 'Multi-agent architecture for autonomous development', 'WoodBricks', 'Sudoku Secrets', 'Services I can provide', 'AI workflow automation', 'Agentic development systems', 'AI agents', 'LLM-assisted development', 'mobile-toc', 'Quick navigation', 'Быстрая навигация'];
+const mustContain = ['Iurii Shpynev', 'Technical Architect & AI System Builder', `${experienceYears} years in software engineering`, 'https://t.me/JustYork', 'https://www.linkedin.com/in/shpynev', 'yorkshp@gmail.com', 'meta name="robots" content="index, follow', 'rel="alternate" hreflang="en"', 'Irkutsk, Russia', 'Открыт к релевантным обсуждениям', 'Architecture notes', 'Multi-agent architecture for autonomous development', 'WoodBricks', 'Sudoku Secrets', 'Services I can provide', 'AI workflow automation', 'Agentic development systems', 'AI agents', 'LLM-assisted development', 'mobile-toc', 'Quick navigation', 'Быстрая навигация', 'Page not found'];
 for (const needle of mustContain) {
   if (!joined.includes(needle)) throw new Error(`Missing required content: ${needle}`);
 }
