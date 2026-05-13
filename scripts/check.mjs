@@ -1,5 +1,16 @@
 import { readFile, stat } from 'node:fs/promises';
 
+function getExperienceYears(startIso = '2011-06-01') {
+  const [year, month, day] = startIso.split('-').map(Number);
+  const now = new Date();
+  let years = now.getFullYear() - year;
+  const beforeAnniversary = now.getMonth() + 1 < month || (now.getMonth() + 1 === month && now.getDate() < day);
+  if (beforeAnniversary) years -= 1;
+  return `${years}+`;
+}
+
+const experienceYears = getExperienceYears();
+
 const required = [
   'dist/index.html',
   'dist/en/index.html',
@@ -16,7 +27,7 @@ const required = [
 for (const file of required) await stat(file);
 const all = await Promise.all(required.filter((f) => f.endsWith('.html') || f.endsWith('.css') || f.endsWith('.svg')).map((f) => readFile(f, 'utf8')));
 const joined = all.join('\n');
-const mustContain = ['Iurii Shpynev', 'Technical Architect & AI System Builder', 'https://t.me/JustYork', 'https://www.linkedin.com/in/shpynev', 'yorkshp@gmail.com', 'meta name="robots" content="index, follow', 'rel="alternate" hreflang="en"', 'Irkutsk, Russia', 'Открыт к релевантным обсуждениям', 'Architecture notes', 'Multi-agent architecture for autonomous development', 'WoodBricks', 'Sudoku Secrets'];
+const mustContain = ['Iurii Shpynev', 'Technical Architect & AI System Builder', `${experienceYears} years in software engineering`, 'https://t.me/JustYork', 'https://www.linkedin.com/in/shpynev', 'yorkshp@gmail.com', 'meta name="robots" content="index, follow', 'rel="alternate" hreflang="en"', 'Irkutsk, Russia', 'Открыт к релевантным обсуждениям', 'Architecture notes', 'Multi-agent architecture for autonomous development', 'WoodBricks', 'Sudoku Secrets'];
 for (const needle of mustContain) {
   if (!joined.includes(needle)) throw new Error(`Missing required content: ${needle}`);
 }
@@ -31,4 +42,7 @@ const sitemap = await readFile('dist/sitemap.xml', 'utf8');
 if (!sitemap.includes('<loc>https://justyork.dev/en/</loc>') || !sitemap.includes('<loc>https://justyork.dev/ru/</loc>')) throw new Error('Sitemap misses localized pages');
 const robots = await readFile('dist/robots.txt', 'utf8');
 if (!robots.includes('Sitemap: https://justyork.dev/sitemap.xml')) throw new Error('Robots misses sitemap URL');
+const source = await readFile('src/content.mjs', 'utf8');
+if (!source.includes("experienceStart: '2011-06-01'")) throw new Error('Experience start date is not configured');
+if (source.includes('experienceYears')) throw new Error('Hardcoded experienceYears field should not be used');
 console.log('Checks passed');

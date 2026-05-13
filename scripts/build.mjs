@@ -9,8 +9,22 @@ const list = (items, cls = 'list') => `<ul class="${cls}">${items.map((item) => 
 const tags = (items) => `<div class="tags">${items.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}</div>`;
 const isoDate = new Date().toISOString().slice(0, 10);
 
+function getExperienceYears() {
+  const [year, month, day] = site.experienceStart.split('-').map(Number);
+  const now = new Date();
+  let years = now.getFullYear() - year;
+  const beforeAnniversary = now.getMonth() + 1 < month || (now.getMonth() + 1 === month && now.getDate() < day);
+  if (beforeAnniversary) years -= 1;
+  return `${years}+`;
+}
+
+function applyDynamicExperience(value) {
+  return String(value).replaceAll('dynamicExperience', getExperienceYears());
+}
+
 function layout(lang, body) {
   const l = languages[lang];
+  const localized = { ...l, title: applyDynamicExperience(l.title), description: applyDynamicExperience(l.description) };
   const canonical = `${site.url}${l.path}`;
   const navTargets = ['profile', 'expertise', 'case-studies', 'experience', 'cv', 'contact'];
   const jsonLd = {
@@ -25,8 +39,8 @@ function layout(lang, body) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(l.title)}</title>
-  <meta name="description" content="${esc(l.description)}">
+  <title>${esc(localized.title)}</title>
+  <meta name="description" content="${esc(localized.description)}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="${esc(site.name)}">
   <meta name="theme-color" content="#07090d">
@@ -35,14 +49,14 @@ function layout(lang, body) {
   <link rel="alternate" hreflang="ru" href="${site.url}/ru/">
   <link rel="alternate" hreflang="x-default" href="${site.url}/en/">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="${esc(l.title)}">
-  <meta property="og:description" content="${esc(l.description)}">
+  <meta property="og:title" content="${esc(localized.title)}">
+  <meta property="og:description" content="${esc(localized.description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${site.url}/og-image.svg">
   <meta property="og:site_name" content="${esc(site.name)}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${esc(l.title)}">
-  <meta name="twitter:description" content="${esc(l.description)}">
+  <meta name="twitter:title" content="${esc(localized.title)}">
+  <meta name="twitter:description" content="${esc(localized.description)}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
@@ -73,7 +87,7 @@ function page(lang) {
     <div>
       <div class="kicker">${esc(l.heroKicker)}</div>
       <h1>${esc(l.heroTitle)}</h1>
-      <p class="lead">${esc(l.heroText)}</p>
+      <p class="lead">${esc(applyDynamicExperience(l.heroText))}</p>
       <div class="actions">
         <a class="button button--primary" href="#contact">${esc(l.ctaPrimary)}</a>
         <a class="button" href="/cv/iurii-shpynev-cv.pdf" download>${esc(l.ctaSecondary)}</a>
@@ -83,11 +97,11 @@ function page(lang) {
     <aside class="card hero-card" aria-label="Profile summary">
       <div class="signal"><b>${esc(site.name)}</b><span>${esc(site.headline)}</span></div>
       <div class="signal"><b>${esc(site.location)}</b><span>${lang === 'ru' ? 'Remote / Europe-friendly' : 'Remote / Europe-friendly'}</span></div>
-      <div class="signal"><b>${esc(site.experienceYears)} years</b><span>Software engineering</span></div>
+      <div class="signal"><b>${esc(getExperienceYears())} years</b><span>Software engineering</span></div>
       <div class="signal"><b>Backend · Data · AI · Games</b><span>Architecture & delivery</span></div>
     </aside>
   </div>
-  <div class="container proofs" aria-label="${esc(l.proofTitle)}">${proofPoints[lang].map((point) => `<div class="proof">${esc(point)}</div>`).join('')}</div>
+  <div class="container proofs" aria-label="${esc(l.proofTitle)}">${proofPoints[lang].map((point) => `<div class="proof">${esc(applyDynamicExperience(point))}</div>`).join('')}</div>
 </section>
 
 <section class="section" id="profile">
@@ -141,7 +155,7 @@ function page(lang) {
 
 function cvHtml() {
   const lines = experience.map((job) => `<li><strong>${esc(job.company)} — ${esc(job.role)}</strong><br>${esc(job.dates)} · ${esc(job.location)}<br>${esc(job.summary)}</li>`).join('');
-  return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(site.experienceYears)} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'Multi-agent architecture', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership', 'Game development', 'Google Play releases'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
+  return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(getExperienceYears())} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'Multi-agent architecture', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership', 'Game development', 'Google Play releases'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
 }
 
 function pdfEscape(s) { return String(s).replace(/[\u2013\u2014]/g, '-').replace(/[\u2192]/g, '->').replace(/[^\x09\x0A\x0D\x20-\x7E]/g, '').replace(/[\\()]/g, '\\$&'); }
@@ -156,7 +170,7 @@ function createPdf() {
     `${site.location} | ${site.contacts.linkedin} | ${site.contacts.telegram} | ${site.contacts.email} | ${site.contacts.github}`,
     '',
     'Summary',
-    'Technical Lead and Technical Architect with 14+ years in software engineering. Experience in high-load platforms, backend/full-stack development, data pipelines, ML-driven content search and recommendations, reliability engineering and technical leadership.',
+    `Technical Lead and Technical Architect with ${getExperienceYears()} years in software engineering. Experience in high-load platforms, backend/full-stack development, data pipelines, ML-driven content search and recommendations, reliability engineering and technical leadership.`,
     '',
     'Core skills',
     'Technical Architecture; AI-assisted systems; multi-agent architecture; PHP; Node.js; Go; Python; C#; JavaScript; PostgreSQL; BigQuery; Apache Airflow; OpenSearch; SLO/SLI; incident management; compliance; automation; game development; Google Play releases.',

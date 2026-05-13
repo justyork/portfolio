@@ -5,7 +5,7 @@ export const site = {
   alternateName: 'Iurii (Yuriy) Shpynev',
   headline: 'Technical Architect & AI System Builder',
   location: 'Limassol, Cyprus',
-  experienceYears: '14+',
+  experienceStart: '2011-06-01',
   contacts: {
     linkedin: 'https://www.linkedin.com/in/shpynev',
     telegram: 'https://t.me/JustYork',
@@ -23,11 +23,11 @@ export const languages = {
     altLabel: 'RU',
     htmlLang: 'en',
     title: 'Iurii Shpynev — Technical Architect & AI System Builder',
-    description: 'Technical Architect and AI System Builder with 14+ years in software engineering, high-load platforms, data pipelines, reliability and technical leadership.',
+    description: 'Technical Architect and AI System Builder with dynamicExperience years in software engineering, high-load platforms, data pipelines, reliability and technical leadership.',
     nav: ['Profile', 'Expertise', 'Case Studies', 'Experience', 'CV', 'Contact'],
     heroKicker: 'Technical Architect & AI System Builder',
     heroTitle: 'I design reliable systems, data platforms and AI-assisted products.',
-    heroText: 'With 14+ years in software engineering, I combine architecture, hands-on backend/full-stack development and technical leadership to build scalable, maintainable and future-proof solutions.',
+    heroText: 'With dynamicExperience years in software engineering, I combine architecture, hands-on backend/full-stack development and technical leadership to build scalable, maintainable and future-proof solutions.',
     ctaPrimary: 'Contact me',
     ctaSecondary: 'Download CV',
     proofTitle: 'Core proof points',
@@ -58,11 +58,11 @@ export const languages = {
     altLabel: 'EN',
     htmlLang: 'ru',
     title: 'Iurii Shpynev — Technical Architect & AI System Builder',
-    description: 'Technical Architect и AI System Builder с 14+ годами в software engineering: high-load платформы, data pipelines, reliability и technical leadership.',
+    description: 'Technical Architect и AI System Builder с dynamicExperience годами в software engineering: high-load платформы, data pipelines, reliability и technical leadership.',
     nav: ['Профиль', 'Экспертиза', 'Кейсы', 'Опыт', 'CV', 'Контакты'],
     heroKicker: 'Technical Architect & AI System Builder',
     heroTitle: 'Проектирую надёжные системы, data-платформы и AI-assisted продукты.',
-    heroText: 'За 14+ лет в software engineering я объединяю архитектуру, hands-on backend/full-stack разработку и техническое лидерство, чтобы создавать масштабируемые, поддерживаемые и долгоживущие решения.',
+    heroText: 'За dynamicExperience лет в software engineering я объединяю архитектуру, hands-on backend/full-stack разработку и техническое лидерство, чтобы создавать масштабируемые, поддерживаемые и долгоживущие решения.',
     ctaPrimary: 'Связаться',
     ctaSecondary: 'Скачать CV',
     proofTitle: 'Ключевые факты',
@@ -89,7 +89,7 @@ export const languages = {
 
 export const proofPoints = {
   en: [
-    '14+ years in software engineering',
+    'dynamicExperience years in software engineering',
     '~28B records / ~2TB data migration',
     'High-load platforms and multitenant architecture',
     'ML-driven content search and recommendations',
@@ -97,7 +97,7 @@ export const proofPoints = {
     '2 released games on Google Play'
   ],
   ru: [
-    '14+ лет в software engineering',
+    'dynamicExperience лет в software engineering',
     'Миграция ~28B записей / ~2TB данных',
     'High-load платформы и multitenant architecture',
     'ML-driven content search и recommendations',
