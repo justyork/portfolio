@@ -16,7 +16,7 @@ const required = [
 for (const file of required) await stat(file);
 const all = await Promise.all(required.filter((f) => f.endsWith('.html') || f.endsWith('.css') || f.endsWith('.svg')).map((f) => readFile(f, 'utf8')));
 const joined = all.join('\n');
-const mustContain = ['Iurii Shpynev', 'Technical Architect & AI System Builder', 'https://t.me/JustYork', 'https://www.linkedin.com/in/shpynev', 'yorkshp@gmail.com', 'meta name="robots" content="index, follow', 'rel="alternate" hreflang="en"'];
+const mustContain = ['Iurii Shpynev', 'Technical Architect & AI System Builder', 'https://t.me/JustYork', 'https://www.linkedin.com/in/shpynev', 'yorkshp@gmail.com', 'meta name="robots" content="index, follow', 'rel="alternate" hreflang="en"', 'Irkutsk, Russia', 'Открыт к релевантным обсуждениям', 'Architecture notes', 'Multi-agent architecture for autonomous development', 'WoodBricks', 'Sudoku Secrets'];
 for (const needle of mustContain) {
   if (!joined.includes(needle)) throw new Error(`Missing required content: ${needle}`);
 }

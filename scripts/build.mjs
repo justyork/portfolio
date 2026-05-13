@@ -1,6 +1,6 @@
 import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { site, languages, proofPoints, expertise, caseStudies, experience, education, spokenLanguages, certifications } from '../src/content.mjs';
+import { site, languages, proofPoints, expertise, architectureNotes, caseStudies, experience, education, spokenLanguages, certifications } from '../src/content.mjs';
 
 const out = 'dist';
 const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -77,14 +77,14 @@ function page(lang) {
       <div class="actions">
         <a class="button button--primary" href="#contact">${esc(l.ctaPrimary)}</a>
         <a class="button" href="/cv/iurii-shpynev-cv.pdf" download>${esc(l.ctaSecondary)}</a>
-        <a class="button" href="/cv/iurii-shpynev-cv.html">Printable CV</a>
+        <a class="button" href="/cv/iurii-shpynev-cv.html">${lang === 'ru' ? 'CV для печати' : 'Printable CV'}</a>
       </div>
     </div>
     <aside class="card hero-card" aria-label="Profile summary">
       <div class="signal"><b>${esc(site.name)}</b><span>${esc(site.headline)}</span></div>
-      <div class="signal"><b>${esc(site.location)}</b><span>Remote / Europe-friendly</span></div>
+      <div class="signal"><b>${esc(site.location)}</b><span>${lang === 'ru' ? 'Remote / Europe-friendly' : 'Remote / Europe-friendly'}</span></div>
       <div class="signal"><b>${esc(site.experienceYears)} years</b><span>Software engineering</span></div>
-      <div class="signal"><b>Backend · Data · AI</b><span>Architecture & delivery</span></div>
+      <div class="signal"><b>Backend · Data · AI · Games</b><span>Architecture & delivery</span></div>
     </aside>
   </div>
   <div class="container proofs" aria-label="${esc(l.proofTitle)}">${proofPoints[lang].map((point) => `<div class="proof">${esc(point)}</div>`).join('')}</div>
@@ -120,7 +120,8 @@ function page(lang) {
 </section>
 
 <section class="section" id="writing">
-  <div class="container panel"><div class="kicker">06</div><h2>${esc(l.writingTitle)}</h2><p>${esc(l.writingText)}</p></div>
+  <div class="container section__head"><div><div class="kicker">06</div><h2>${esc(l.writingTitle)}</h2><p>${esc(l.writingText)}</p></div></div>
+  <div class="container grid grid--3">${architectureNotes[lang].map((note) => `<article class="panel note"><h3>${esc(note.title)}</h3><p>${esc(note.text)}</p></article>`).join('')}</div>
 </section>
 
 <section class="section" id="contact">
@@ -140,7 +141,7 @@ function page(lang) {
 
 function cvHtml() {
   const lines = experience.map((job) => `<li><strong>${esc(job.company)} — ${esc(job.role)}</strong><br>${esc(job.dates)} · ${esc(job.location)}<br>${esc(job.summary)}</li>`).join('');
-  return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(site.experienceYears)} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
+  return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(site.experienceYears)} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'Multi-agent architecture', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership', 'Game development', 'Google Play releases'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
 }
 
 function pdfEscape(s) { return String(s).replace(/[\u2013\u2014]/g, '-').replace(/[\u2192]/g, '->').replace(/[^\x09\x0A\x0D\x20-\x7E]/g, '').replace(/[\\()]/g, '\\$&'); }
@@ -158,7 +159,7 @@ function createPdf() {
     'Technical Lead and Technical Architect with 14+ years in software engineering. Experience in high-load platforms, backend/full-stack development, data pipelines, ML-driven content search and recommendations, reliability engineering and technical leadership.',
     '',
     'Core skills',
-    'Technical Architecture; AI-assisted systems; PHP; Node.js; Go; Python; C#; JavaScript; PostgreSQL; BigQuery; Apache Airflow; OpenSearch; SLO/SLI; incident management; compliance; automation.',
+    'Technical Architecture; AI-assisted systems; multi-agent architecture; PHP; Node.js; Go; Python; C#; JavaScript; PostgreSQL; BigQuery; Apache Airflow; OpenSearch; SLO/SLI; incident management; compliance; automation; game development; Google Play releases.',
     '',
     'Experience',
     ...experience.flatMap((job) => ['', `${job.company} - ${job.role}`, `${job.dates} | ${job.location}`, job.summary]),
