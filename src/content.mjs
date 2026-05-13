@@ -59,32 +59,32 @@ export const languages = {
     altPath: '/en/',
     altLabel: 'EN',
     htmlLang: 'ru',
-    title: 'Iurii Shpynev — Technical Architect & AI System Builder',
-    description: 'Technical Architect и AI System Builder с dynamicExperience годами в software engineering: AI-assisted systems, agentic workflows, automation, high-load платформы и data pipelines.',
+    title: 'Iurii Shpynev — технический архитектор и разработчик AI-систем',
+    description: 'Технический архитектор и разработчик AI-систем: dynamicExperience лет опыта в разработке ПО, AI-процессы, автоматизация, высоконагруженные платформы и конвейеры данных.',
     nav: ['Профиль', 'Экспертиза', 'Услуги', 'Кейсы', 'Опыт', 'CV', 'Контакты'],
-    heroKicker: 'Technical Architect & AI System Builder',
-    heroTitle: 'Проектирую надёжные системы, AI-assisted workflows и data-платформы.',
-    heroText: 'За dynamicExperience лет в software engineering я объединяю архитектуру, hands-on backend/full-stack разработку и техническое лидерство, чтобы создавать масштабируемые, поддерживаемые и долгоживущие решения.',
+    heroKicker: 'Технический архитектор и разработчик AI-систем',
+    heroTitle: 'Проектирую надёжные системы, AI-процессы и платформы данных.',
+    heroText: 'За dynamicExperience лет в разработке ПО я объединяю архитектуру, практическую backend/full-stack разработку и техническое лидерство, чтобы создавать масштабируемые, поддерживаемые и долгоживущие решения.',
     ctaPrimary: 'Связаться',
     ctaSecondary: 'Скачать CV',
     proofTitle: 'Ключевые факты',
     aboutTitle: 'Профиль',
     about: [
-      'Я Technical Lead и Technical Architect с опытом построения и масштабирования high-load платформ, проектирования устойчивых системных архитектур и лидерства кросс-функциональных команд в сложных проектах.',
-      'Мой инженерный фокус — backend и full-stack разработка на PHP, Node.js, Go, Python и C#, базы данных, распределённые системы, data pipelines и AI-assisted engineering workflows. В опыте есть крупные миграции данных, ML-driven content search и recommendation services, AI/automation workflows, а также frameworks, повышающие уверенность релизов и надёжность систем.',
-      'Помимо разработки, я фокусируюсь на architecture governance, reliability, compliance и incident management: внедряю SLO/SLI, выступаю Incident Commander в критических инцидентах, менторю инженеров и стандартизирую инженерные процессы.'
+      'Я технический лидер и архитектор с опытом построения и масштабирования высоконагруженных платформ, проектирования устойчивых систем и лидерства кросс-функциональных команд в сложных проектах.',
+      'Мой инженерный фокус — backend/full-stack разработка на PHP, Node.js, Go, Python и C#, базы данных, распределённые системы, конвейеры данных и инженерные процессы с использованием AI. В опыте есть крупные миграции данных, ML-поиск и рекомендательные сервисы, автоматизация рабочих процессов и фреймворки, повышающие уверенность релизов и надёжность систем.',
+      'Помимо разработки, я фокусируюсь на архитектурном управлении, надёжности, комплаенсе и управлении инцидентами: внедряю SLO/SLI, беру на себя роль координатора в критических инцидентах, менторю инженеров и стандартизирую инженерные процессы.'
     ],
     expertiseTitle: 'Экспертиза',
     servicesTitle: 'Услуги, которые я могу оказывать',
-    servicesIntro: 'Практическая помощь командам, которым нужны архитектура, AI-enabled automation и надёжная delivery-модель — от discovery до production rollout.',
+    servicesIntro: 'Практическая помощь командам, которым нужны архитектура, AI-автоматизация и надёжная модель поставки изменений — от первичного анализа до запуска в продакшен.',
     casesTitle: 'Выбранные кейсы',
-    casesIntro: 'Публично-безопасные описания системной, data и automation работы. Внутренние детали реализации намеренно не раскрываются.',
+    casesIntro: 'Публично-безопасные описания системной работы, проектов с данными и автоматизации. Внутренние детали реализации намеренно не раскрываются.',
     experienceTitle: 'Опыт',
     cvTitle: 'CV, образование и языки',
     writingTitle: 'Заметки по архитектуре',
-    writingText: 'Короткие структурированные заметки о том, как я подхожу к системам, автономии и engineering delivery.',
+    writingText: 'Короткие структурированные заметки о том, как я подхожу к системам, автономии и поставке инженерных изменений.',
     contactTitle: 'Контакты',
-    contactText: 'Открыт к релевантным обсуждениям про technical leadership, architecture, AI systems и product engineering.',
+    contactText: 'Открыт к релевантным обсуждениям про техническое лидерство, архитектуру, AI-системы и продуктовую разработку.',
     labels: {
       role: 'Роль', context: 'Контекст', technologies: 'Технологии', problem: 'Проблема', built: 'Что сделал', result: 'Результат', publicSafe: 'Публичность', dates: 'Даты', location: 'Локация'
     }
@@ -101,11 +101,11 @@ export const proofPoints = {
     '2 released games on Google Play'
   ],
   ru: [
-    'dynamicExperience лет в software engineering',
+    'dynamicExperience лет опыта в разработке ПО',
     'Миграция ~28B записей / ~2TB данных',
-    'High-load платформы и multitenant architecture',
-    'AI agents, automation и ML-driven search',
-    'SLO/SLI, incident command и культура reliability',
+    'Высоконагруженные платформы и мультитенантная архитектура',
+    'AI-агенты, автоматизация и ML-поиск',
+    'SLO/SLI, управление инцидентами и культура надёжности',
     '2 выпущенные игры в Google Play'
   ]
 };
@@ -121,13 +121,13 @@ export const expertise = {
     { title: 'Game development & product', items: ['Mobile game development', 'Google Play releases', 'Product iteration', 'Game UX', 'Casual games'] }
   ],
   ru: [
-    { title: 'Архитектура и reliability', items: ['Solution Architecture', 'Multitenant architecture', 'Distributed systems', 'High-load platforms', 'Architecture governance', 'SLO/SLI', 'Incident management', 'Postmortems'] },
-    { title: 'Backend и платформы', items: ['PHP', 'Node.js', 'Go', 'Python', 'C#', 'JavaScript', 'API design', 'Swagger / OpenAPI', 'Automatic CRUD generation'] },
-    { title: 'AI systems и automation', items: ['AI agents', 'Agent orchestration', 'LLM-assisted development', 'Prompt/context engineering', 'RAG-ready knowledge workflows', 'AI workflow automation', 'Human-in-the-loop review', 'Evaluation and guardrails'] },
-    { title: 'Data, search и AI-adjacent systems', items: ['PostgreSQL', 'BigQuery', 'Apache Airflow', 'OpenSearch', 'Data pipelines', 'Image similarity search', 'Recommendation services', 'Search relevance evaluation', 'Semantic search'] },
-    { title: 'Leadership и delivery', items: ['Development coordination', 'Release planning', 'Requirements analysis', 'Stakeholder communication', 'Mentoring', 'Onboarding', 'Engineering standards'] },
-    { title: 'Compliance и automation', items: ['Legal compliance', 'Consent management', 'Privacy-aware design', 'Workflow automation', 'Creative production automation'] },
-    { title: 'Game development и product', items: ['Mobile game development', 'Google Play releases', 'Product iteration', 'Game UX', 'Casual games'] }
+    { title: 'Архитектура и надёжность', items: ['Архитектура решений', 'Мультитенантная архитектура', 'Распределённые системы', 'Высоконагруженные платформы', 'Архитектурное управление', 'SLO/SLI', 'Управление инцидентами', 'Постмортемы'] },
+    { title: 'Backend и платформы', items: ['PHP', 'Node.js', 'Go', 'Python', 'C#', 'JavaScript', 'Проектирование API', 'Swagger / OpenAPI', 'Автоматическая генерация CRUD'] },
+    { title: 'AI-системы и автоматизация', items: ['AI-агенты', 'Оркестрация агентов', 'Разработка с LLM', 'Проектирование промптов и контекста', 'Подготовка баз знаний для RAG', 'Автоматизация AI-процессов', 'Проверка человеком в контуре', 'Оценка качества и защитные ограничения'] },
+    { title: 'Данные, поиск и ML/AI-системы', items: ['PostgreSQL', 'BigQuery', 'Apache Airflow', 'OpenSearch', 'Конвейеры данных', 'Поиск похожих изображений', 'Рекомендательные сервисы', 'Оценка релевантности поиска', 'Семантический поиск'] },
+    { title: 'Лидерство и поставка изменений', items: ['Координация разработки', 'Планирование релизов', 'Анализ требований', 'Коммуникация со стейкхолдерами', 'Менторинг', 'Онбординг', 'Инженерные стандарты'] },
+    { title: 'Комплаенс и автоматизация', items: ['Юридический комплаенс', 'Управление согласиями', 'Проектирование с учётом приватности', 'Автоматизация рабочих процессов', 'Автоматизация производства креативов'] },
+    { title: 'Разработка игр и продукт', items: ['Разработка мобильных игр', 'Релизы в Google Play', 'Продуктовые итерации', 'Игровой UX', 'Казуальные игры'] }
   ]
 };
 
@@ -141,12 +141,12 @@ export const serviceOfferings = {
     { title: 'Data pipelines and automation', text: 'Production-grade data workflows, Airflow orchestration, migration planning, monitoring, retry policies and operational handover.' }
   ],
   ru: [
-    { title: 'AI workflow automation', text: 'Проектирование и внедрение практических AI-assisted workflows: маршрутизация задач, подготовка контекста, генерация черновиков, review gates и интеграция с текущими инструментами.' },
-    { title: 'Agentic development systems', text: 'Multi-agent operating models для software teams: source-of-truth knowledge base, runtime handoff, Git-based validation, воспроизводимые команды и безопасные границы staging-to-production.' },
-    { title: 'AI-ready knowledge bases', text: 'Структурирование документации, decision logs и состояния проектов так, чтобы AI tools использовали надёжный контекст вместо разрозненных чатов и tribal knowledge.' },
-    { title: 'Search and recommendation systems', text: 'Backend architecture для content tagging, semantic/image similarity search, OpenSearch relevance evaluation и recommendation workflows.' },
-    { title: 'Architecture audit и technical leadership', text: 'Оценка platform boundaries, reliability risks, data flows, API contracts, release process, observability и team delivery model.' },
-    { title: 'Data pipelines и automation', text: 'Production-grade data workflows, Airflow orchestration, migration planning, monitoring, retry policies и operational handover.' }
+    { title: 'Автоматизация AI-процессов', text: 'Проектирование и внедрение практических процессов с использованием AI: маршрутизация задач, подготовка контекста, генерация черновиков, контрольные точки ревью и интеграция с текущими инструментами.' },
+    { title: 'Агентные системы разработки', text: 'Мультиагентные рабочие модели для инженерных команд: единая база знаний, передача контекста между агентами, проверка через Git, воспроизводимые команды и безопасные границы между staging и production.' },
+    { title: 'Базы знаний, готовые для AI', text: 'Структурирование документации, журналов решений и состояния проектов так, чтобы AI-инструменты использовали надёжный контекст вместо разрозненных чатов и неформальных знаний.' },
+    { title: 'Поисковые и рекомендательные системы', text: 'Backend-архитектура для тегирования контента, семантического поиска, поиска похожих изображений, оценки релевантности в OpenSearch и рекомендательных процессов.' },
+    { title: 'Архитектурный аудит и техническое лидерство', text: 'Оценка границ платформы, рисков надёжности, потоков данных, API-контрактов, релизного процесса, наблюдаемости и модели работы команды.' },
+    { title: 'Конвейеры данных и автоматизация', text: 'Надёжные production-grade процессы работы с данными: оркестрация в Airflow, планирование миграций, мониторинг, политики повторов и передача решения в эксплуатацию.' }
   ]
 };
 
@@ -157,9 +157,9 @@ export const architectureNotes = {
     { title: 'Reliability by design', text: 'I prefer systems where observability, SLO/SLI thinking, incident response and postmortems are part of the design rather than emergency additions after launch.' }
   ],
   ru: [
-    { title: 'Архитектура как operating model', text: 'Хорошая архитектура — это не только схемы. Это границы, ownership, quality gates и feedback loops, которые позволяют командам безопасно выпускать изменения.' },
-    { title: 'AI-assisted delivery', text: 'AI-агенты наиболее полезны, когда работают внутри явного контекста: source-of-truth документации, статусов задач, decision logs, review gates и воспроизводимых команд.' },
-    { title: 'Reliability by design', text: 'Я предпочитаю системы, где observability, SLO/SLI, incident response и postmortems заложены в дизайн, а не добавляются экстренно после запуска.' }
+    { title: 'Архитектура как операционная модель', text: 'Хорошая архитектура — это не только схемы. Это границы, зоны ответственности, контрольные точки качества и обратная связь, которые позволяют командам безопасно выпускать изменения.' },
+    { title: 'Поставка изменений с AI', text: 'AI-агенты наиболее полезны, когда работают внутри явного контекста: документации как единого источника правды, статусов задач, журналов решений, ревью и воспроизводимых команд.' },
+    { title: 'Надёжность по умолчанию', text: 'Я предпочитаю системы, где наблюдаемость, SLO/SLI, реакция на инциденты и постмортемы заложены в дизайн, а не добавляются экстренно после запуска.' }
   ]
 };
 
@@ -177,16 +177,16 @@ export const caseStudies = {
     { name: 'Playable ads automation', role: 'Automatization Lead / Senior PHP Programmer', context: 'VOLKA GAMES', technologies: ['PHP', 'Automation systems', 'Mobile advertising workflows'], problem: 'Reduce manual work and improve consistency in mobile advertising creative production.', built: 'Built systems for generating playable ads for mobile advertising platforms.', result: 'Faster and more repeatable creative production workflows.' }
   ],
   ru: [
-    { name: 'Multitenant platform architecture', role: 'Technical Lead / Architect', context: 'X-FLOW', technologies: ['Architecture', 'Distributed systems', 'Backend platform design'], problem: 'Обеспечить масштабируемый onboarding tenant-ов и изоляцию deployments без операционного хаоса.', built: 'Спроектировал и реализовал multitenant architecture patterns для large-scale платформы.', result: 'Появилась возможность масштабируемого onboarding и isolated deployments.' },
-    { name: 'Consent management service', role: 'Technical Lead / Architect', context: 'X-FLOW', technologies: ['Service architecture', 'Compliance', 'Privacy-aware design'], problem: 'Построить надёжную обработку consent, совместимую с compliance и интеграциями across systems.', built: 'Вёл дизайн архитектуры consent management service.', result: 'Улучшены compliance readiness, scalability и consistency интеграций.' },
-    { name: '28B-record data migration', role: 'Technical Lead / Data architecture', context: 'X-FLOW', technologies: ['BigQuery', 'PostgreSQL', 'Partitioning', 'Indexing', 'Apache Airflow'], problem: 'Перенести и реструктурировать очень большой dataset в модель, пригодную для scalable queries.', built: 'Построил migration/restructuring pipeline с partitioning и indexing, orchestrated via Airflow.', result: 'Надёжная репликация и scalable queries для ~28B records / ~2TB.' },
-    { name: 'Airflow orchestration platform', role: 'Technical Lead / Platform engineer', context: 'X-FLOW', technologies: ['Apache Airflow', 'DAGs', 'Retry policies', 'SLA', 'Monitoring'], problem: 'Стандартизировать и повысить reliability production data workflows.', built: 'Развернул Airflow как company-wide orchestration tool и построил production DAGs.', result: 'Cross-system pipelines с retry, SLA и monitoring.' },
-    { name: 'ML-driven content search and recommendations', role: 'Technical Lead / Backend + AI systems', context: 'X-FLOW', technologies: ['Go', 'Python', 'OpenSearch', 'AI tagging', 'Image similarity search', 'Automated image descriptions', 'Recommendation systems', 'Search relevance evaluation'], problem: 'Улучшить content discovery, search relevance и recommendation quality.', built: 'Построил content tagging system, image recommendation/search services и OpenSearch relevance evaluation framework.', result: 'Foundation для ML-driven features и заметно лучшее качество поиска.' },
-    { name: 'Multi-agent architecture for autonomous development', role: 'System architect / AI workflow designer', context: 'OpenClaw-based agent workflow', technologies: ['AI agents', 'Agent orchestration', 'LLM-assisted development', 'Prompt/context engineering', 'Obsidian knowledge base', 'Git-based handoff', 'Runtime events', 'Human-in-the-loop review'], problem: 'Координировать автономных агентов так, чтобы они могли работать над реальными проектами, не теряя контекст, не дублируя решения и не обходя границы review/deployment.', built: 'Спроектировал multi-agent operating model, где Obsidian выступает source of truth, состояние проекта фиксируется в tasks и decision logs, агенты могут продолжать runtime events, а code/deployment changes проверяются воспроизводимыми командами и Git history.', result: 'Повторяемый autonomous development workflow с persistent context, более понятными handoffs и безопасными границами staging-to-production.' },
-    { name: 'Released Google Play games', role: 'Game developer / product engineer', context: 'Independent mobile game development', technologies: ['Mobile game development', 'Google Play', 'Casual games', 'Product iteration'], problem: 'Сделать и выпустить полноценные casual games, а не только прототипы, с уровнем готовности для публичной публикации.', built: 'Разработал и выпустил две мобильные игры в Google Play: WoodBricks и Sudoku Secrets.', result: 'Практический product experience в game design, implementation, release preparation и post-release iteration.' },
-    { name: 'OpenAPI CRUD framework', role: 'Technical Lead / Developer experience', context: 'X-FLOW', technologies: ['JavaScript', 'Swagger', 'OpenAPI', 'Code generation'], problem: 'Стандартизировать API design и уменьшить repetitive implementation work.', built: 'Формализовал code style conventions и построил automatic CRUD generation вокруг OpenAPI.', result: 'Более консистентный API design и улучшенный developer experience.' },
-    { name: 'Adobe After Effects asset library', role: 'Automatization Lead / Senior PHP Programmer', context: 'VOLKA GAMES', technologies: ['PHP', 'Web UI', 'Adobe After Effects workflow automation'], problem: 'Улучшить creative production workflow и переиспользование assets.', built: 'Создал asset library plugin for Adobe After Effects с web UI.', result: 'Более структурированное управление creative assets.' },
-    { name: 'Playable ads automation', role: 'Automatization Lead / Senior PHP Programmer', context: 'VOLKA GAMES', technologies: ['PHP', 'Automation systems', 'Mobile advertising workflows'], problem: 'Снизить ручную работу и повысить consistency в production playable ads.', built: 'Построил системы генерации playable ads для mobile advertising platforms.', result: 'Более быстрый и повторяемый creative production workflow.' }
+    { name: 'Мультитенантная архитектура платформы', role: 'Технический лидер / архитектор', context: 'X-FLOW', technologies: ['Архитектура', 'Распределённые системы', 'Backend-платформа'], problem: 'Обеспечить масштабируемое подключение tenant-ов и изоляцию окружений без операционного хаоса.', built: 'Спроектировал и реализовал паттерны мультитенантной архитектуры для крупной платформы.', result: 'Появилась возможность масштабируемо подключать tenant-ов и изолировать окружения.' },
+    { name: 'Сервис управления согласиями', role: 'Технический лидер / архитектор', context: 'X-FLOW', technologies: ['Сервисная архитектура', 'Комплаенс', 'Проектирование с учётом приватности'], problem: 'Построить надёжную обработку согласий, совместимую с требованиями комплаенса и интеграциями между системами.', built: 'Вёл проектирование архитектуры сервиса управления согласиями.', result: 'Улучшены готовность к требованиям комплаенса, масштабируемость и консистентность интеграций.' },
+    { name: 'Миграция данных на 28B записей', role: 'Технический лидер / архитектура данных', context: 'X-FLOW', technologies: ['BigQuery', 'PostgreSQL', 'Партиционирование', 'Индексация', 'Apache Airflow'], problem: 'Перенести и реструктурировать очень большой набор данных в модель, пригодную для масштабируемых запросов.', built: 'Построил конвейер миграции и реструктуризации с партиционированием и индексацией, оркестрированный через Airflow.', result: 'Надёжная репликация и масштабируемые запросы для ~28B записей / ~2TB.' },
+    { name: 'Платформа оркестрации на Airflow', role: 'Технический лидер / платформенный инженер', context: 'X-FLOW', technologies: ['Apache Airflow', 'DAGs', 'Политики повторов', 'SLA', 'Мониторинг'], problem: 'Стандартизировать и повысить надёжность production-процессов работы с данными.', built: 'Развернул Airflow как общеиспользуемый инструмент оркестрации и построил production DAGs.', result: 'Появились межсистемные конвейеры с повторными запусками, SLA и мониторингом.' },
+    { name: 'ML-поиск контента и рекомендации', role: 'Технический лидер / Backend + AI-системы', context: 'X-FLOW', technologies: ['Go', 'Python', 'OpenSearch', 'AI-тегирование', 'Поиск похожих изображений', 'Автоматические описания изображений', 'Рекомендательные системы', 'Оценка релевантности поиска'], problem: 'Улучшить поиск контента, релевантность выдачи и качество рекомендаций.', built: 'Построил систему тегирования контента, сервисы поиска/рекомендаций по изображениям и фреймворк оценки релевантности в OpenSearch.', result: 'Создана основа для ML-функций и заметно более качественного поиска.' },
+    { name: 'Мультиагентная архитектура для автономной разработки', role: 'Системный архитектор / дизайнер AI-процессов', context: 'Агентный workflow на базе OpenClaw', technologies: ['AI-агенты', 'Оркестрация агентов', 'Разработка с LLM', 'Проектирование промптов и контекста', 'База знаний Obsidian', 'Передача контекста через Git', 'Runtime events', 'Проверка человеком в контуре'], problem: 'Координировать автономных агентов так, чтобы они могли работать над реальными проектами, не теряя контекст, не дублируя решения и не обходя границы ревью и deployment.', built: 'Спроектировал мультиагентную операционную модель, где Obsidian выступает единым источником правды, состояние проекта фиксируется в задачах и журналах решений, агенты могут продолжать runtime events, а изменения в коде и deployment проверяются воспроизводимыми командами и историей Git.', result: 'Повторяемый процесс автономной разработки с сохраняемым контекстом, понятной передачей задач и безопасными границами между staging и production.' },
+    { name: 'Выпущенные игры в Google Play', role: 'Разработчик игр / продуктовый инженер', context: 'Независимая разработка мобильных игр', technologies: ['Разработка мобильных игр', 'Google Play', 'Казуальные игры', 'Продуктовые итерации'], problem: 'Сделать и выпустить полноценные казуальные игры, а не только прототипы, с уровнем готовности для публичной публикации.', built: 'Разработал и выпустил две мобильные игры в Google Play: WoodBricks и Sudoku Secrets.', result: 'Практический продуктовый опыт в проектировании игровой механики, реализации, подготовке релиза и post-release итерациях.' },
+    { name: 'OpenAPI CRUD framework', role: 'Технический лидер / опыт разработки', context: 'X-FLOW', technologies: ['JavaScript', 'Swagger', 'OpenAPI', 'Генерация кода'], problem: 'Стандартизировать проектирование API и уменьшить объём повторяющейся реализации.', built: 'Формализовал правила стиля кода и построил автоматическую генерацию CRUD вокруг OpenAPI.', result: 'Более консистентное проектирование API и улучшенный опыт разработки.' },
+    { name: 'Библиотека ассетов для Adobe After Effects', role: 'Лидер автоматизации / Senior PHP Programmer', context: 'VOLKA GAMES', technologies: ['PHP', 'Web UI', 'Автоматизация процесса в Adobe After Effects'], problem: 'Улучшить процесс подготовки production-креативов и переиспользование ассетов.', built: 'Создал плагин библиотеки ассетов для Adobe After Effects с web-интерфейсом.', result: 'Более структурированное управление креативными ассетами.' },
+    { name: 'Автоматизация playable ads', role: 'Лидер автоматизации / Senior PHP Programmer', context: 'VOLKA GAMES', technologies: ['PHP', 'Системы автоматизации', 'Процессы мобильной рекламы'], problem: 'Снизить ручную работу и повысить консистентность production playable ads.', built: 'Построил системы генерации playable ads для платформ мобильной рекламы.', result: 'Более быстрый и повторяемый процесс подготовки production-креативов.' }
   ]
 };
 
@@ -201,10 +201,27 @@ export const experience = [
   { company: 'IDEAL Web Studio', role: 'Junior Web Developer', dates: 'Sep 2011 — Dec 2011', location: 'Irkutsk, Russia', summary: 'HTML coding and studio CMS websites.' }
 ];
 
+export const experienceRu = [
+  { company: 'X-FLOW', role: 'Technical Lead', dates: 'июнь 2023 — настоящее время', location: 'Кипр', summary: 'Архитектура, AI-процессы, управление релизами, мультитенантность, управление согласиями, конвейеры данных, ML-поиск/рекомендации, SLO/SLI и управление инцидентами.' },
+  { company: 'FX Back Office', role: 'Senior Web Developer', dates: 'сентябрь 2022 — июнь 2023', location: 'Лимасол, Кипр', summary: 'Лидерство в команде и проектах, поддержка Forex CRM, разработка функциональности и платёжные интеграции.' },
+  { company: 'VOLKA GAMES', role: 'Лидер автоматизации / Senior PHP Programmer', dates: 'июль 2021 — сентябрь 2022', location: 'Лимасол, Кипр', summary: 'Автоматизация рабочих процессов, база креативов, плагин библиотеки ассетов для Adobe After Effects и генерация playable ads.' },
+  { company: 'Ortnec Services Ltd', role: 'Senior Full Stack Engineer', dates: 'май 2020 — июль 2021', location: 'Лимасол, Кипр', summary: 'Разработка высоконагруженных систем, создание и тестирование MVP, мониторинг и производительность.' },
+  { company: 'WebYard Studio', role: 'Lead Full Stack Developer', dates: 'сентябрь 2013 — май 2020', location: 'Иркутск, Россия', summary: 'Руководил двумя командами web-разработки; поддерживал 10+ нагруженных проектов и десятки сайтов.' },
+  { company: 'IRKIPEDIA', role: 'Web Developer', dates: 'август 2012 — сентябрь 2013', location: 'Иркутск, Россия', summary: 'WordPress-сайты и разработка фотостока на Kohana.' },
+  { company: 'DOT.RU Web Studio', role: 'Web Developer', dates: 'декабрь 2011 — август 2012', location: 'Иркутск, Россия', summary: 'Сайты на CMS компании и парсер статистики сайтов на Kohana.' },
+  { company: 'IDEAL Web Studio', role: 'Junior Web Developer', dates: 'сентябрь 2011 — декабрь 2011', location: 'Иркутск, Россия', summary: 'HTML-вёрстка и сайты на CMS студии.' }
+];
+
 export const education = [
   'Moscow Open Institute — Bachelor of Engineering, Computer Science and Computer Engineering (2016–2020)',
   'SkillFactory — Specialist, Data Science (2019–2020)',
   'Irkutsk State Pedagogical College #1 — Specialist, Pedagogy of additional education (2006–2010)'
+];
+
+export const educationRu = [
+  'Moscow Open Institute — бакалавр инженерии, информатика и вычислительная техника (2016–2020)',
+  'SkillFactory — специалист, Data Science (2019–2020)',
+  'Иркутский государственный педагогический колледж №1 — специалист, педагогика дополнительного образования (2006–2010)'
 ];
 
 export const spokenLanguages = [
@@ -213,7 +230,18 @@ export const spokenLanguages = [
   'Greek — Elementary'
 ];
 
+export const spokenLanguagesRu = [
+  'Русский — родной / свободное владение',
+  'Английский — профессиональный рабочий уровень',
+  'Греческий — базовый уровень'
+];
+
 export const certifications = [
   'Certificates of completion of two levels of the portfolio investor course',
   'Certificate in Business and Marketing'
+];
+
+export const certificationsRu = [
+  'Сертификаты о прохождении двух уровней курса портфельного инвестора',
+  'Сертификат по бизнесу и маркетингу'
 ];
