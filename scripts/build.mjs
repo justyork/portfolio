@@ -173,6 +173,47 @@ function page(lang) {
   return layout(lang, body);
 }
 
+function error404Html() {
+  const title = '404 — page not found';
+  const description = 'The requested page does not exist. Choose English or Russian portfolio version, or open the printable CV.';
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${title}</title>
+  <meta name="description" content="${description}">
+  <meta name="robots" content="noindex, follow">
+  <meta name="author" content="${esc(site.name)}">
+  <meta name="theme-color" content="#07090d">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <main id="main" class="hero error-page">
+    <div class="container hero__grid">
+      <section>
+        <div class="kicker">404 / Страница не найдена</div>
+        <h1>Page not found</h1>
+        <p class="lead">The page may have moved, or the link may be outdated. Choose a portfolio version or open the printable CV.</p>
+        <p class="lead">Страница могла быть перемещена, или ссылка устарела. Выберите версию портфолио или откройте CV для печати.</p>
+        <div class="actions">
+          <a class="button button--primary" href="/ru/">Русская версия</a>
+          <a class="button" href="/en/">English version</a>
+          <a class="button" href="/cv/iurii-shpynev-cv.html">Printable CV</a>
+        </div>
+      </section>
+      <aside class="card hero-card" aria-label="404 details">
+        <div class="signal"><b>404</b><span>Not found / Не найдено</span></div>
+        <div class="signal"><b>${esc(site.name)}</b><span>${esc(site.headline)}</span></div>
+        <div class="signal"><b>Contact</b><span>${esc(site.contacts.email)}</span></div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>`;
+}
+
 function cvHtml() {
   const lines = experience.map((job) => `<li><strong>${esc(job.company)} — ${esc(job.role)}</strong><br>${esc(job.dates)} · ${esc(job.location)}<br>${esc(job.summary)}</li>`).join('');
   return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(getExperienceYears())} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'AI agents', 'Agent orchestration', 'Workflow automation', 'Multi-agent architecture', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership', 'Game development', 'Google Play releases'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
@@ -260,6 +301,7 @@ await writeFile(join(out, 'en/index.html'), page('en'));
 await writeFile(join(out, 'ru/index.html'), page('ru'));
 await writeFile(join(out, 'cv/iurii-shpynev-cv.html'), cvHtml());
 await writeFile(join(out, 'cv/iurii-shpynev-cv.pdf'), createPdf(), 'binary');
+await writeFile(join(out, '404.html'), error404Html());
 await writeFile(join(out, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#07090d"/><path d="M16 18h10l6 12 6-12h10L37 38v10H27V38L16 18z" fill="#7dd3fc"/></svg>`);
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
