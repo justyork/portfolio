@@ -174,8 +174,8 @@ function page(lang) {
 }
 
 function error404Html() {
-  const title = '404 — page not found';
-  const description = 'The requested page does not exist. Choose English or Russian portfolio version, or open the printable CV.';
+  const title = '404 — Page Not Found';
+  const description = 'The requested page does not exist. Choose a portfolio version or open the printable CV.';
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -193,18 +193,17 @@ function error404Html() {
   <main id="main" class="hero error-page">
     <div class="container hero__grid">
       <section>
-        <div class="kicker">404 / Страница не найдена</div>
+        <div class="kicker">404 — Page Not Found</div>
         <h1>Page not found</h1>
         <p class="lead">The page may have moved, or the link may be outdated. Choose a portfolio version or open the printable CV.</p>
-        <p class="lead">Страница могла быть перемещена, или ссылка устарела. Выберите версию портфолио или откройте CV для печати.</p>
         <div class="actions">
-          <a class="button button--primary" href="/ru/">Русская версия</a>
-          <a class="button" href="/en/">English version</a>
+          <a class="button button--primary" href="/en/">English Portfolio</a>
+          <a class="button" href="/ru/">Russian Portfolio</a>
           <a class="button" href="/cv/iurii-shpynev-cv.html">Printable CV</a>
         </div>
       </section>
       <aside class="card hero-card" aria-label="404 details">
-        <div class="signal"><b>404</b><span>Not found / Не найдено</span></div>
+        <div class="signal"><b>404</b><span>Not Found</span></div>
         <div class="signal"><b>${esc(site.name)}</b><span>${esc(site.headline)}</span></div>
         <div class="signal"><b>Contact</b><span>${esc(site.contacts.email)}</span></div>
       </aside>
