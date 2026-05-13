@@ -72,6 +72,13 @@ function layout(lang, body) {
       </nav>
     </div>
   </header>
+  <details class="mobile-toc">
+    <summary>${lang === 'ru' ? 'Разделы' : 'Sections'}</summary>
+    <nav aria-label="${lang === 'ru' ? 'Быстрая навигация' : 'Quick navigation'}">
+      ${l.nav.map((n, i) => `<a href="#${navTargets[i]}">${esc(n)}</a>`).join('')}
+      <a href="${l.altPath}">${l.altLabel}</a>
+    </nav>
+  </details>
   <main id="main">${body}</main>
   <footer class="footer"><div class="container">© ${new Date().getFullYear()} ${esc(site.name)}. Built as a static portfolio for ${esc(site.url.replace('https://',''))}.</div></footer>
 </body>
