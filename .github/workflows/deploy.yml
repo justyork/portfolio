@@ -1,0 +1,74 @@
+name: Deploy justyork.dev
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: justyork-dev-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    name: Build, check and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      DEPLOY_HOST: ${{ secrets.JUSTYORK_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.JUSTYORK_DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.JUSTYORK_DEPLOY_USER }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install --no-audit --no-fund
+          fi
+
+      - name: Build
+        run: npm run build
+
+      - name: Check generated site
+        run: npm run check
+
+      - name: Configure SSH
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST"
+          test -n "$DEPLOY_PORT"
+          test -n "$DEPLOY_USER"
+          test -n "${{ secrets.JUSTYORK_DEPLOY_SSH_KEY }}"
+          test -n "${{ secrets.JUSTYORK_DEPLOY_KNOWN_HOSTS }}"
+
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.JUSTYORK_DEPLOY_SSH_KEY }}" > ~/.ssh/justyork_deploy_key
+          chmod 600 ~/.ssh/justyork_deploy_key
+          printf '%s\n' "${{ secrets.JUSTYORK_DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy on production server
+        run: |
+          set -euo pipefail
+          ssh \
+            -i ~/.ssh/justyork_deploy_key \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "deploy-justyork-dev --branch master"
