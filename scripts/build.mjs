@@ -59,7 +59,7 @@ function layout(lang, body) {
     </div>
   </header>
   <main id="main">${body}</main>
-  <footer class="footer"><div class="container">© ${new Date().getFullYear()} ${esc(site.name)}. Built as a static, bilingual portfolio for ${esc(site.url.replace('https://',''))}.</div></footer>
+  <footer class="footer"><div class="container">© ${new Date().getFullYear()} ${esc(site.name)}. Built as a static portfolio for ${esc(site.url.replace('https://',''))}.</div></footer>
 </body>
 </html>`;
 }
@@ -209,7 +209,7 @@ await writeFile(join(out, 'index.html'), `<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(site.name)} — ${esc(site.headline)}</title>
-  <meta name="description" content="Bilingual portfolio and expanded CV for ${esc(site.name)}: technical architecture, AI systems, backend platforms and data pipelines.">
+  <meta name="description" content="Portfolio and expanded CV for ${esc(site.name)}: technical architecture, AI systems, backend platforms and data pipelines.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${site.url}/en/">
   <link rel="alternate" hreflang="en" href="${site.url}/en/">
@@ -219,7 +219,7 @@ await writeFile(join(out, 'index.html'), `<!doctype html>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <main class="hero"><div class="container"><div class="kicker">Bilingual portfolio</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)}. Choose language / выберите язык.</p><div class="actions"><a class="button button--primary" href="/en/">English</a><a class="button" href="/ru/">Русский</a></div></div></main>
+  <main class="hero"><div class="container"><div class="kicker">Technical Architect & AI System Builder</div><h1>${esc(site.name)}</h1><p class="lead">Architecture, AI-assisted systems, backend platforms and data pipelines. Choose language / выберите язык.</p><div class="actions"><a class="button button--primary" href="/en/">English</a><a class="button" href="/ru/">Русский</a></div></div></main>
 </body>
 </html>`);
 await writeFile(join(out, 'en/index.html'), page('en'));

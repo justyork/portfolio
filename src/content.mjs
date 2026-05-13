@@ -185,7 +185,6 @@ export const education = [
 export const spokenLanguages = [
   'Russian — Native or bilingual',
   'English — Professional working',
-  'German — Elementary',
   'Greek — Elementary'
 ];
 
