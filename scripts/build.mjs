@@ -1,5 +1,4 @@
 import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { site, languages, proofPoints, expertise, caseStudies, experience, education, spokenLanguages, certifications } from '../src/content.mjs';
 
@@ -8,6 +7,7 @@ const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&
 const slug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const list = (items, cls = 'list') => `<ul class="${cls}">${items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`;
 const tags = (items) => `<div class="tags">${items.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}</div>`;
+const isoDate = new Date().toISOString().slice(0, 10);
 
 function layout(lang, body) {
   const l = languages[lang];
@@ -27,6 +27,9 @@ function layout(lang, body) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(l.title)}</title>
   <meta name="description" content="${esc(l.description)}">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="${esc(site.name)}">
+  <meta name="theme-color" content="#07090d">
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" hreflang="en" href="${site.url}/en/">
   <link rel="alternate" hreflang="ru" href="${site.url}/ru/">
@@ -36,7 +39,10 @@ function layout(lang, body) {
   <meta property="og:description" content="${esc(l.description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${site.url}/og-image.svg">
+  <meta property="og:site_name" content="${esc(site.name)}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(l.title)}">
+  <meta name="twitter:description" content="${esc(l.description)}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
@@ -196,11 +202,64 @@ await mkdir(join(out, 'en'), { recursive: true });
 await mkdir(join(out, 'ru'), { recursive: true });
 await mkdir(join(out, 'cv'), { recursive: true });
 await copyFile('src/assets/styles.css', join(out, 'assets/styles.css'));
-await writeFile(join(out, 'index.html'), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/"><link rel="canonical" href="/en/">');
+await writeFile(join(out, 'index.html'), `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${esc(site.name)} — ${esc(site.headline)}</title>
+  <meta name="description" content="Bilingual portfolio and expanded CV for ${esc(site.name)}: technical architecture, AI systems, backend platforms and data pipelines.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="${site.url}/en/">
+  <link rel="alternate" hreflang="en" href="${site.url}/en/">
+  <link rel="alternate" hreflang="ru" href="${site.url}/ru/">
+  <link rel="alternate" hreflang="x-default" href="${site.url}/en/">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <main class="hero"><div class="container"><div class="kicker">Bilingual portfolio</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)}. Choose language / выберите язык.</p><div class="actions"><a class="button button--primary" href="/en/">English</a><a class="button" href="/ru/">Русский</a></div></div></main>
+</body>
+</html>`);
 await writeFile(join(out, 'en/index.html'), page('en'));
 await writeFile(join(out, 'ru/index.html'), page('ru'));
 await writeFile(join(out, 'cv/iurii-shpynev-cv.html'), cvHtml());
 await writeFile(join(out, 'cv/iurii-shpynev-cv.pdf'), createPdf(), 'binary');
 await writeFile(join(out, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#07090d"/><path d="M16 18h10l6 12 6-12h10L37 38v10H27V38L16 18z" fill="#7dd3fc"/></svg>`);
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>${site.url}/en/</loc>
+    <lastmod>${isoDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${site.url}/en/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="${site.url}/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${site.url}/en/"/>
+  </url>
+  <url>
+    <loc>${site.url}/ru/</loc>
+    <lastmod>${isoDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${site.url}/en/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="${site.url}/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${site.url}/en/"/>
+  </url>
+  <url>
+    <loc>${site.url}/cv/iurii-shpynev-cv.html</loc>
+    <lastmod>${isoDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
+`;
+await writeFile(join(out, 'sitemap.xml'), sitemap);
+await writeFile(join(out, 'robots.txt'), `User-agent: *
+Allow: /
+
+Sitemap: ${site.url}/sitemap.xml
+`);
 await writeFile(join(out, 'og-image.svg'), `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#07090d"/><circle cx="220" cy="90" r="260" fill="#7dd3fc" opacity=".18"/><circle cx="980" cy="120" r="300" fill="#a78bfa" opacity=".18"/><text x="80" y="245" fill="#e8edf5" font-family="Arial" font-size="72" font-weight="700">Iurii Shpynev</text><text x="84" y="330" fill="#7dd3fc" font-family="Arial" font-size="38">Technical Architect &amp; AI System Builder</text><text x="84" y="420" fill="#9ca8b8" font-family="Arial" font-size="30">High-load platforms · Data pipelines · AI-assisted systems</text></svg>`);
 console.log('Built static site into dist/');
