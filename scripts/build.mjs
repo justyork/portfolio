@@ -1,6 +1,6 @@
 import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { site, languages, proofPoints, expertise, architectureNotes, caseStudies, experience, education, spokenLanguages, certifications } from '../src/content.mjs';
+import { site, languages, proofPoints, expertise, serviceOfferings, architectureNotes, caseStudies, experience, education, spokenLanguages, certifications } from '../src/content.mjs';
 
 const out = 'dist';
 const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -26,13 +26,13 @@ function layout(lang, body) {
   const l = languages[lang];
   const localized = { ...l, title: applyDynamicExperience(l.title), description: applyDynamicExperience(l.description) };
   const canonical = `${site.url}${l.path}`;
-  const navTargets = ['profile', 'expertise', 'case-studies', 'experience', 'cv', 'contact'];
+  const navTargets = ['profile', 'expertise', 'services', 'case-studies', 'experience', 'cv', 'contact'];
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'Person', name: site.name,
     alternateName: site.alternateName, jobTitle: site.headline, url: site.url,
     email: site.contacts.email, address: { '@type': 'PostalAddress', addressLocality: 'Limassol', addressCountry: 'Cyprus' },
     sameAs: [site.contacts.linkedin, site.contacts.telegram, site.contacts.github],
-    knowsAbout: ['Technical Architecture', 'AI systems', 'High-load platforms', 'Data pipelines', 'Backend development', 'Reliability engineering']
+    knowsAbout: ['Technical Architecture', 'AI systems', 'AI agents', 'Workflow automation', 'High-load platforms', 'Data pipelines', 'Backend development', 'Reliability engineering']
   };
   return `<!doctype html>
 <html lang="${l.htmlLang}">
@@ -114,18 +114,23 @@ function page(lang) {
   <div class="container grid grid--2">${expertise[lang].map((group) => `<article class="panel"><h3>${esc(group.title)}</h3>${tags(group.items)}</article>`).join('')}</div>
 </section>
 
+<section class="section" id="services">
+  <div class="container section__head"><div><div class="kicker">03</div><h2>${esc(l.servicesTitle)}</h2><p>${esc(l.servicesIntro)}</p></div></div>
+  <div class="container grid grid--3">${serviceOfferings[lang].map((service) => `<article class="panel note"><h3>${esc(service.title)}</h3><p>${esc(service.text)}</p></article>`).join('')}</div>
+</section>
+
 <section class="section" id="case-studies">
-  <div class="container section__head"><div><div class="kicker">03</div><h2>${esc(l.casesTitle)}</h2></div><p>${esc(l.casesIntro)}</p></div>
+  <div class="container section__head"><div><div class="kicker">04</div><h2>${esc(l.casesTitle)}</h2></div><p>${esc(l.casesIntro)}</p></div>
   <div class="container grid grid--2">${cases.map((c) => `<article class="panel case" id="${slug(c.name)}"><div><h3>${esc(c.name)}</h3><p class="meta"><b>${esc(l.labels.role)}:</b> ${esc(c.role)} · <b>${esc(l.labels.context)}:</b> ${esc(c.context)}</p>${tags(c.technologies)}</div><dl><div><dt>${esc(l.labels.problem)}</dt><dd>${esc(c.problem)}</dd></div><div><dt>${esc(l.labels.built)}</dt><dd>${esc(c.built)}</dd></div><div><dt>${esc(l.labels.result)}</dt><dd>${esc(c.result)}</dd></div></dl></article>`).join('')}</div>
 </section>
 
 <section class="section" id="experience">
-  <div class="container section__head"><div><div class="kicker">04</div><h2>${esc(l.experienceTitle)}</h2></div></div>
+  <div class="container section__head"><div><div class="kicker">05</div><h2>${esc(l.experienceTitle)}</h2></div></div>
   <div class="container card panel timeline">${experience.map((job) => `<article class="job"><h3>${esc(job.company)} — ${esc(job.role)}</h3><p class="meta">${esc(job.dates)} · ${esc(job.location)}</p><p>${esc(job.summary)}</p></article>`).join('')}</div>
 </section>
 
 <section class="section" id="cv">
-  <div class="container section__head"><div><div class="kicker">05</div><h2>${esc(l.cvTitle)}</h2></div><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>${esc(l.ctaSecondary)}</a></div></div>
+  <div class="container section__head"><div><div class="kicker">06</div><h2>${esc(l.cvTitle)}</h2></div><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>${esc(l.ctaSecondary)}</a></div></div>
   <div class="container cv-grid">
     <article class="panel"><h3>Education</h3>${list(education)}</article>
     <article class="panel"><h3>Languages</h3>${list(spokenLanguages)}</article>
@@ -134,12 +139,12 @@ function page(lang) {
 </section>
 
 <section class="section" id="writing">
-  <div class="container section__head"><div><div class="kicker">06</div><h2>${esc(l.writingTitle)}</h2><p>${esc(l.writingText)}</p></div></div>
+  <div class="container section__head"><div><div class="kicker">07</div><h2>${esc(l.writingTitle)}</h2><p>${esc(l.writingText)}</p></div></div>
   <div class="container grid grid--3">${architectureNotes[lang].map((note) => `<article class="panel note"><h3>${esc(note.title)}</h3><p>${esc(note.text)}</p></article>`).join('')}</div>
 </section>
 
 <section class="section" id="contact">
-  <div class="container section__head"><div><div class="kicker">07</div><h2>${esc(l.contactTitle)}</h2><p>${esc(l.contactText)}</p></div></div>
+  <div class="container section__head"><div><div class="kicker">08</div><h2>${esc(l.contactTitle)}</h2><p>${esc(l.contactText)}</p></div></div>
   <div class="container panel">
     <div class="contact-links">
       <a class="button button--primary" href="${site.contacts.telegram}" rel="me noopener">Telegram</a>
@@ -155,7 +160,7 @@ function page(lang) {
 
 function cvHtml() {
   const lines = experience.map((job) => `<li><strong>${esc(job.company)} — ${esc(job.role)}</strong><br>${esc(job.dates)} · ${esc(job.location)}<br>${esc(job.summary)}</li>`).join('');
-  return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(getExperienceYears())} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'Multi-agent architecture', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership', 'Game development', 'Google Play releases'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
+  return layout('en', `<section class="section"><div class="container"><div class="kicker">Sanitized CV</div><h1>${esc(site.name)}</h1><p class="lead">${esc(site.headline)} · ${esc(site.location)} · ${esc(getExperienceYears())} years in software engineering</p><div class="actions"><a class="button" href="/cv/iurii-shpynev-cv.pdf" download>Download PDF</a><a class="button" href="/en/">Back to portfolio</a></div></div></section><section class="section"><div class="container grid grid--2"><article class="panel"><h2>Contacts</h2>${list([site.contacts.linkedin, site.contacts.telegram, site.contacts.email, site.contacts.github])}</article><article class="panel"><h2>Core skills</h2>${list(['Technical Architecture', 'AI-assisted systems', 'AI agents', 'Agent orchestration', 'Workflow automation', 'Multi-agent architecture', 'High-load platforms', 'Backend/full-stack development', 'Data pipelines', 'Reliability engineering', 'Technical leadership', 'Game development', 'Google Play releases'])}</article></div></section><section class="section"><div class="container panel"><h2>Experience</h2><ul class="list">${lines}</ul></div></section><section class="section"><div class="container cv-grid"><article class="panel"><h2>Education</h2>${list(education)}</article><article class="panel"><h2>Languages</h2>${list(spokenLanguages)}</article><article class="panel"><h2>Certifications</h2>${list(certifications)}</article></div></section>`);
 }
 
 function pdfEscape(s) { return String(s).replace(/[\u2013\u2014]/g, '-').replace(/[\u2192]/g, '->').replace(/[^\x09\x0A\x0D\x20-\x7E]/g, '').replace(/[\\()]/g, '\\$&'); }
@@ -170,10 +175,10 @@ function createPdf() {
     `${site.location} | ${site.contacts.linkedin} | ${site.contacts.telegram} | ${site.contacts.email} | ${site.contacts.github}`,
     '',
     'Summary',
-    `Technical Lead and Technical Architect with ${getExperienceYears()} years in software engineering. Experience in high-load platforms, backend/full-stack development, data pipelines, ML-driven content search and recommendations, reliability engineering and technical leadership.`,
+    `Technical Lead and Technical Architect with ${getExperienceYears()} years in software engineering. Experience in high-load platforms, backend/full-stack development, data pipelines, AI-assisted workflows, ML-driven content search and recommendations, reliability engineering and technical leadership.`,
     '',
     'Core skills',
-    'Technical Architecture; AI-assisted systems; multi-agent architecture; PHP; Node.js; Go; Python; C#; JavaScript; PostgreSQL; BigQuery; Apache Airflow; OpenSearch; SLO/SLI; incident management; compliance; automation; game development; Google Play releases.',
+    'Technical Architecture; AI-assisted systems; AI agents; agent orchestration; LLM-assisted development; prompt/context engineering; workflow automation; multi-agent architecture; PHP; Node.js; Go; Python; C#; JavaScript; PostgreSQL; BigQuery; Apache Airflow; OpenSearch; SLO/SLI; incident management; compliance; automation; game development; Google Play releases.',
     '',
     'Experience',
     ...experience.flatMap((job) => ['', `${job.company} - ${job.role}`, `${job.dates} | ${job.location}`, job.summary]),
@@ -223,7 +228,7 @@ await writeFile(join(out, 'index.html'), `<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(site.name)} — ${esc(site.headline)}</title>
-  <meta name="description" content="Portfolio and expanded CV for ${esc(site.name)}: technical architecture, AI systems, backend platforms and data pipelines.">
+  <meta name="description" content="Portfolio and expanded CV for ${esc(site.name)}: technical architecture, AI systems, automation, backend platforms and data pipelines.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${site.url}/en/">
   <link rel="alternate" hreflang="en" href="${site.url}/en/">
@@ -233,7 +238,7 @@ await writeFile(join(out, 'index.html'), `<!doctype html>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <main class="hero"><div class="container"><div class="kicker">Technical Architect & AI System Builder</div><h1>${esc(site.name)}</h1><p class="lead">Architecture, AI-assisted systems, backend platforms and data pipelines. Choose language / выберите язык.</p><div class="actions"><a class="button button--primary" href="/en/">English</a><a class="button" href="/ru/">Русский</a></div></div></main>
+  <main class="hero"><div class="container"><div class="kicker">Technical Architect & AI System Builder</div><h1>${esc(site.name)}</h1><p class="lead">Architecture, AI-assisted systems, automation, backend platforms and data pipelines. Choose language / выберите язык.</p><div class="actions"><a class="button button--primary" href="/en/">English</a><a class="button" href="/ru/">Русский</a></div></div></main>
 </body>
 </html>`);
 await writeFile(join(out, 'en/index.html'), page('en'));
